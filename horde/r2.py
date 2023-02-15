@@ -83,7 +83,6 @@ def delete_source_image(source_image_uuid):
         Bucket=r2_source_image_bucket,
         Key=f"{source_image_uuid}.webp"
     )
-    logger.debug(response)
 
 def upload_image(client, bucket, image, filename, quality=100):
     image_io = BytesIO()
