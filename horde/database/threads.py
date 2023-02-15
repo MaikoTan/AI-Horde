@@ -132,9 +132,9 @@ def check_waiting_prompts():
             WaitingPrompt.source_image != None,
         ).all()
         for wp in expired_source_img_wps:
-            logger.debug(f"{wp.id}_src.webp")
+            logger.debug(f"{wp.id}_src")
             try:
-                delete_source_image(f"{wp.id}_src.webp")
+                delete_source_image(f"{wp.id}_src")
             except Exception as e:
                 logger.warning(e)
         expired_source_msk_wps = db.session.query(
@@ -143,9 +143,9 @@ def check_waiting_prompts():
             WaitingPrompt.source_mask != None,
         ).all()
         for wp in expired_source_msk_wps:
-            logger.debug(f"{wp.id}_msk.webp")
+            logger.debug(f"{wp.id}_msk")
             try:
-                delete_source_image(f"{wp.id}_msk.webp")
+                delete_source_image(f"{wp.id}_msk")
             except Exception as e:
                 logger.warning(e)
         return
