@@ -75,7 +75,7 @@ def hash_api_key(unhashed_api_key):
     return hashed_key
 
 def get_expiry_date():
-    return datetime.utcnow() + dateutil.relativedelta.relativedelta(minutes=+1)
+    return datetime.utcnow() + dateutil.relativedelta.relativedelta(minutes=+20)
 
 def get_interrogation_form_expiry_date():
     return datetime.utcnow() + dateutil.relativedelta.relativedelta(minutes=+3)
