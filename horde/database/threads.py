@@ -126,6 +126,29 @@ def check_waiting_prompts():
             # We do not delete shared images
             WaitingPrompt.shared == False,
         )
+        expired_source_img_wps = db.session.query(
+            WaitingPrompt.id
+        ).filter(
+            WaitingPrompt.source_image != None,
+        ).all()
+        for wp in expired_source_img_wps:
+            logger.debug(f"{wp.id}_src.webp")
+            try:
+                delete_source_image(f"{wp.id}_src.webp")
+            except Exception as e:
+                logger.warning(e)
+        expired_source_msk_wps = db.session.query(
+            WaitingPrompt.id
+        ).filter(
+            WaitingPrompt.source_mask != None,
+        ).all()
+        for wp in expired_source_msk_wps:
+            logger.debug(f"{wp.id}_msk.webp")
+            try:
+                delete_source_image(f"{wp.id}_msk.webp")
+            except Exception as e:
+                logger.warning(e)
+        return
         all_wp_r_id = [wp.id for wp in expired_r_wps.all()]
         expired_r2_procgens = db.session.query(
             ProcessingGeneration.id,
