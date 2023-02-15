@@ -122,7 +122,6 @@ def check_waiting_prompts():
         # Cleans expired WPs
         expired_wps = db.session.query(WaitingPrompt).filter(WaitingPrompt.expiry < datetime.utcnow())
         expired_r_wps = expired_wps.filter(
-            WaitingPrompt.r2 == True,
             # We do not delete shared images
             WaitingPrompt.shared == False,
         )
